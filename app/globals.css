@@ -425,6 +425,13 @@ img {
   }
 }
 
+/* the phone version is not centred behind the rail, so it has no y offset */
+@keyframes marquee-band {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .rail {
   position: relative;
   z-index: 1;
@@ -840,14 +847,14 @@ img {
 
   :root {
     --pad: 6vw;
-    --gallery-pad: 5vw;
+    --gallery-pad: 4.5vw;
     --fs-title: 6.4vw;
     --fs-eyebrow: 3.1vw;
     --fs-statement: clamp(19px, 4.4vw, 34px);
     --fs-stat: clamp(28px, 7.4vw, 52px);
     --fs-label: 11px;
     --fs-note: 12px;
-    --fs-marquee: 22vw;
+    --fs-marquee: 11vw;
     --fs-logo: 20px;
   }
 
@@ -879,10 +886,12 @@ img {
     max-width: none;
   }
 
+  /* stacked one per row, the figures read better centred than ranged left */
   .stats {
     grid-template-columns: 1fr;
     gap: 4vh;
     margin-top: 7vh;
+    text-align: center;
   }
 
   .stat + .stat {
@@ -893,9 +902,23 @@ img {
     padding-top: 4vh;
   }
 
+  /* behind the rail the marquee only ever shows as white slivers in 4px gaps,
+     which reads as noise — on a phone it gets its own band above the frames */
+  .marquee {
+    top: 17vh;
+    transform: none;
+    animation-name: marquee-band;
+  }
+
+  .marquee span {
+    padding-right: 0.5em;
+    letter-spacing: 0.01em;
+  }
+
   .rail {
-    height: 56vh;
-    gap: 1.4vw;
+    height: 48vh;
+    gap: 2vw;
+    margin-top: 9vh;
   }
 
   .studio {
@@ -1010,12 +1033,13 @@ img {
     margin: 0 2.4vw;
   }
 
+  /* no hover on a phone, so the tapped frame has to carry the section */
   .rail[data-active="0"] .card:nth-child(1),
   .rail[data-active="1"] .card:nth-child(2),
   .rail[data-active="2"] .card:nth-child(3),
   .rail[data-active="3"] .card:nth-child(4),
   .rail[data-active="4"] .card:nth-child(5) {
-    flex-grow: 3;
+    flex-grow: 4;
   }
 }
 

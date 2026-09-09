@@ -41,7 +41,13 @@ The whole page is one scroll choreography, in four beats:
 
    It also runs its own rAF rather than waiting on scroll events — under smooth scrolling
    an event-driven transform lands a frame late and stutters. `TAKEOVER`, `FADE_FROM` and
-   `FADE_SPAN` in `app/components/Gallery.tsx` tune it. Five frames sit flush across the viewport at equal width. Hovering one
+   `FADE_SPAN` in `app/components/Gallery.tsx` tune it.
+
+   On a phone the marquee is lifted out from behind the rail: through 4px gaps it only
+   ever showed as white slivers, which read as noise rather than type, so it takes its own
+   band above the frames at a legible size. The tapped frame also grows further there
+   (`flex-grow: 4`) since there is no hover to preview with — one tap has to carry the
+   section. Five frames sit flush across the viewport at equal width. Hovering one
    grows it to ~3.9× its siblings and drops an amber rule along its bottom edge; a
    very large marquee runs behind them and is only ever glimpsed through the gaps.
 4. **Rooms that endure.** A white section: a one-line headline set in the same extended
